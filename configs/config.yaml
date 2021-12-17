@@ -1,0 +1,29 @@
+﻿Server:
+  RunMode: debug
+  # RunMode: release
+  HttpPort: 9000
+  ReadTimeout: 60
+  WriteTimeout: 60
+General:
+  LogSavePath: storage/logs
+  LogFileName: log
+  LogFileExt: .log
+  LogMaxSize: 60
+  LogMaxAge: 7
+  MaxThreads: 100
+  MaxTasks: 1
+  # 目标路径
+  TargetPath: D:\image
+  # 目标阈值(1024GB)
+  TargetValue: 1024
+  # 定时任务规则：秒/分/时/日/月/星期（cron）
+  # 每天0-23时每隔10秒执行一次任务
+  CronSpec: "*/10 * 0-7 * * ?"
+  # 设置操作失败补偿次数
+  Count: 3
+Database:
+  # 树兰安吉医院：espacs:Espacs@2020@tcp(172.16.0.7:3306)/espacs?charset=utf8
+  DBConn: espacs:Espacs@2020@tcp(172.16.0.7:3306)/espacs?charset=utf8
+  DBType: mysql
+  MaxIdleConns: 100
+  MaxOpenConns: 100
