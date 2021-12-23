@@ -12,7 +12,7 @@ func GetDeleteData() {
 	from instance ins
 	left join image im on im.instance_key = ins.instance_key
 	left join study_location sl on sl.n_station_code = ins.location_code
-	where ins.FileExist = 1 and(ins.file_exist_ibs_local = 1 or ins.file_exist_obs_cloud = 1)
+	where ins.FileExist = 1 and(ins.file_exist_obs_local = 1 or ins.file_exist_obs_cloud = 1)
 	order by ins.update_time asc limit ?;`
 	// global.Logger.Debug(sql)
 	rows, err := global.DBEngine.Query(sql, global.GeneralSetting.MaxTasks)

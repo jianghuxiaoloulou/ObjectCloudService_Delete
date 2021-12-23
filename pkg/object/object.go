@@ -24,7 +24,7 @@ func NewObject(data global.ObjectData) *ObjectData {
 	}
 }
 
-// 上传对象[POST]
+// 删除文件
 func (obj *ObjectData) DeleteFile() {
 	if general.DeleteFile(obj.File) {
 		global.Logger.Info(obj.Key, " :文件删除成功，更新标志")

@@ -13,7 +13,7 @@ import (
 // @title 本地存储文件删除服务
 // @version 1.0.0.1
 // @description 文件删除服务
-// @termsOfService https://github.com/jianghuxiaoloulou/OBbjectCloudService.git
+// @termsOfService https://github.com/jianghuxiaoloulou/ObjectCloudService_Delete.git
 func main() {
 	global.Logger.Info("*******开始运行文件删除服务********")
 
