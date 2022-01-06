@@ -93,4 +93,5 @@ go get -u github.com/juju/ratelimit@v1.0.1
 
 # 修改记录
 # 2021/12/14 开始重构文件删除服务
+# 2022/01/06 修改了表结构，增加了file_remote表，上传数据的所有内容从file_remote表中获取
 

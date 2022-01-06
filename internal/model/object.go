@@ -12,8 +12,9 @@ func GetDeleteData() {
 	from instance ins
 	left join image im on im.instance_key = ins.instance_key
 	left join study_location sl on sl.n_station_code = ins.location_code
-	where ins.FileExist = 1 and(ins.file_exist_obs_local = 1 or ins.file_exist_obs_cloud = 1)
-	order by ins.update_time asc limit ?;`
+	left join file_remote fr on ins.instance_key = fr.instance_key
+	where fr.dcm_file_exist = 1 and (fr.dcm_file_exist_obs_local = 1 or fr.dcm_file_exist_obs_cloud = 1)
+	order by fr.dcm_update_time_retrieve asc limit ?;`
 	// global.Logger.Debug(sql)
 	rows, err := global.DBEngine.Query(sql, global.GeneralSetting.MaxTasks)
 	if err != nil {
@@ -61,21 +62,21 @@ func UpdateDeleteStatus(key int64, filetype global.FileType, status bool) {
 	case global.DCM:
 		if status {
 			global.Logger.Info("***DCM文件删除成功，更新状态***")
-			sql := `update instance ins set ins.FileExist = 0 where ins.instance_key = ?;`
+			sql := `update file_remote fr set fr.dcm_file_exist = 0 where fr.instance_key = ?;`
 			global.DBEngine.Exec(sql, key)
 		} else {
 			global.Logger.Info("***DCM文件删除失败，更新状态***")
-			sql := `update instance ins set ins.FileExist = 2 where ins.instance_key = ?;`
+			sql := `update file_remote fr set fr.dcm_file_exist = 2 where fr.instance_key = ?;`
 			global.DBEngine.Exec(sql, key)
 		}
 	case global.JPG:
 		if status {
 			global.Logger.Info("***JPG文件删除成功，更新状态***")
-			sql := `update image im set im.file_exist = 0 where im.instance_key = ?;`
+			sql := `update file_remote fr set fr.img_file_exist = 0 where fr.instance_key = ?;`
 			global.DBEngine.Exec(sql, key)
 		} else {
 			global.Logger.Info("***JPG文件删除失败，更新状态***")
-			sql := `update image im set im.file_exist = 2 where im.instance_key = ?;`
+			sql := `update file_remote fr set fr.img_file_exist = 2 where fr.instance_key = ?;`
 			global.DBEngine.Exec(sql, key)
 		}
 	}
