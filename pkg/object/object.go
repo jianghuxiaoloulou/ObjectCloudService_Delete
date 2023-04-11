@@ -26,17 +26,16 @@ func NewObject(data global.ObjectData) *ObjectData {
 
 // 删除文件
 func (obj *ObjectData) DeleteFile() {
-	if general.DeleteFile(obj.File) {
+	if general.DeleteFile(obj.File) != 2 {
 		global.Logger.Info(obj.Key, " :文件删除成功，更新标志")
 		model.UpdateDeleteStatus(obj.Key, obj.Type, true)
 	} else {
 		global.Logger.Info(obj.Key, " :文件删除失败")
-		if !ReDo(obj) {
-			global.Logger.Info("数据补偿失败", obj.Key)
-			global.Logger.Info(obj.Key, " :文件删除失败，更新标志")
-			// 上传失败更新数据库
-			model.UpdateDeleteStatus(obj.Key, obj.Type, false)
-		}
+		// if !ReDo(obj) {
+		global.Logger.Info("数据补偿失败", obj.Key)
+		// 上传失败更新数据库
+		model.UpdateDeleteStatus(obj.Key, obj.Type, false)
+		// }
 	}
 }
 

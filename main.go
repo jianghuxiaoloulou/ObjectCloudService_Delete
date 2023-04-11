@@ -17,7 +17,7 @@ import (
 func main() {
 	global.Logger.Info("*******开始运行文件删除服务********")
 
-	global.ObjectDataChan = make(chan global.ObjectData)
+	global.ObjectDataChan = make(chan global.ObjectData, global.GeneralSetting.MaxTasks)
 
 	// 注册工作池，传入任务
 	// 参数1 初始化worker(工人)设置最大线程数
@@ -34,7 +34,7 @@ func main() {
 			}
 		}
 	}()
-
+	global.RunStatus = false
 	run()
 }
 

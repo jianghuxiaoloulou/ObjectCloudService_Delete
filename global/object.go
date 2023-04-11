@@ -17,4 +17,5 @@ type ObjectData struct {
 
 var (
 	ObjectDataChan chan ObjectData
+	RunStatus      bool // 当前获取的数据是否运行完成
 )

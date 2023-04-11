@@ -10,18 +10,21 @@ type ServerSettingS struct {
 }
 
 type GeneralSettingS struct {
-	LogSavePath string
-	LogFileName string
-	LogFileExt  string
-	LogMaxSize  int
-	LogMaxAge   int
-	MaxThreads  int
-	MaxTasks    int
-	TargetPath  string
-	TargetValue int
-	CronSpec    string
-	DeleteCode  int
-	Count       int
+	LogSavePath    string
+	LogFileName    string
+	LogFileExt     string
+	LogMaxSize     int
+	LogMaxAge      int
+	MaxThreads     int
+	MaxTasks       int
+	TargetPath     string
+	TargetValue    int
+	CronSpec       string
+	DeleteCode     int
+	Count          int
+	QueryStartTime string
+	QueryEndTime   string
+	DelImgFlag     string
 }
 
 type DatabaseSettingS struct {
@@ -29,6 +32,7 @@ type DatabaseSettingS struct {
 	DBType       string
 	MaxIdleConns int
 	MaxOpenConns int
+	MaxLifetime  int
 }
 
 func (s *Setting) ReadSection(k string, v interface{}) error {

@@ -42,15 +42,18 @@ func Exist(filename string) bool {
 	return err == nil || os.IsExist(err)
 }
 
-func DeleteFile(dest string) bool {
+func DeleteFile(dest string) int {
 	if !Exist(dest) {
-		return false
+		// 文件不存在
+		return 0
 	} else {
 		err := os.Remove(dest)
 		if err != nil {
-			return false
+			// 文件删除失败
+			return 2
 		}
-		return true
+		// 删除成功
+		return 1
 	}
 }
 

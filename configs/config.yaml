@@ -18,12 +18,20 @@ General:
   TargetValue: 1024
   # 定时任务规则：秒/分/时/日/月/星期（cron）
   # 每天0-23时每隔10秒执行一次任务
-  CronSpec: "*/10 * 0-7 * * ?"
+  CronSpec: "*/10 * 0-23 * * ?"
+  # 删除影像标志 ：001 删除放射，010 删除超声，100 删除内镜，111 全部删除
+  # (通过二进制组合，从左到右，第一位表示内镜，第二位表示超声，第三位表示放射，状态1表示删除，0 表示不删除)
+  DelImgFlag: "010"
   # 设置操作失败补偿次数
   Count: 3
+  # 删除时间，通过时间段，删除数据，优化sql查询数据
+  QueryStartTime: 2021-10-10 00:00:00
+  QueryEndTime: 2021-10-10 23:59:59
+  # 
 Database:
   # 树兰安吉医院：espacs:Espacs@2020@tcp(172.16.0.7:3306)/espacs?charset=utf8
   DBConn: espacs:Espacs@2020@tcp(172.16.0.7:3306)/espacs?charset=utf8
   DBType: mysql
   MaxIdleConns: 100
   MaxOpenConns: 100
+  MaxLifetime: 60
